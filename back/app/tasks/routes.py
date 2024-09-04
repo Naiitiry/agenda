@@ -16,7 +16,7 @@ def get_tasks():
         'creation_date':task.creation_date, 'deadline':task.deadline,
         'complete':task.completed} for task in tasks
     ]
-    return jsonify(tasks_json), 200
+    return tasks_json, 200
 
 @tasks_bp.route('/create_tasks',methods = ['POST'], endpoint='funcion2')
 @jwt_required
