@@ -167,10 +167,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-.frontenv
-/frontenv
-/frontenv/
-frontenv/
+.frontvenv
+/frontvenv
+/frontvenv/
+frontvenv/
 
 # Spyder project settings
 .spyderproject
