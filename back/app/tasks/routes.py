@@ -7,7 +7,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 tasks_bp = Blueprint('tasks', __name__)
 
 @tasks_bp.route('/all_tasks',methods = ['GET'], endpoint='funcion1')
-@jwt_required
+@jwt_required()
 def get_tasks():
     user_id = get_jwt_identity()
     tasks = Task.query.filter_by(user_id=user_id).all()
@@ -16,17 +16,17 @@ def get_tasks():
         'creation_date':task.creation_date, 'deadline':task.deadline,
         'complete':task.completed} for task in tasks
     ]
-    return tasks_json, 200
+    return jsonify(tasks_json), 200
 
 @tasks_bp.route('/create_tasks',methods = ['POST'], endpoint='funcion2')
-@jwt_required
+@jwt_required()
 def create_task():
     data = request.get_json()
     user_id = get_jwt_identity()
     new_task = Task(
         title = data['title'],
         description = data.get('Description'),
-        deadline = datetime.strptime(data['deadline'], '%Y-%m-%d %H:%H:%S'),
+        deadline = datetime.fromisoformat(data['deadline']),
         user_id = user_id
     )
     db.session.add(new_task)
@@ -34,7 +34,7 @@ def create_task():
     return jsonify({'message':'Task created successfully'}), 201
 
 @tasks_bp.route('/update_tasks/<int:task_id>', methods = ['GET','POST'], endpoint='funcion3')
-@jwt_required
+@jwt_required()
 def update_task(task_id):
     user_id = get_jwt_identity()
     data = request.get_json()
@@ -49,7 +49,7 @@ def update_task(task_id):
     return jsonify({'message': 'Task updated successfully'}), 200
 
 @tasks_bp.route('/extend_tasks/<int:task_id>/extend', methods = ['POST'], endpoint='funcion4')
-@jwt_required
+@jwt_required()
 def extend_task(task_id):
     user_id = get_jwt_identity()
     data = request.get_json()

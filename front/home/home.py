@@ -1,6 +1,7 @@
 import flet as ft
 from components.user_card import user_card
 from components.theme import themes_change
+from components.add_task import add_task
 from task.task import task
 from task.create_task import main
 
@@ -27,7 +28,7 @@ def home_page(page: ft.Page, on_logout: callable):
     tareas = task(page)
 
     # Crear tareas
-    #crear_tareas = task(page)
+    crear_tareas = add_task(page)
     
     # Crear la tarjeta de usuario
     user_card_component = user_card(page, username, handle_logout)
@@ -38,6 +39,7 @@ def home_page(page: ft.Page, on_logout: callable):
         controls=[
             cambio_de_tema,
             ft.Text(f"Welcome to the Home Page {username}", size=24),
+            crear_tareas,
             tareas,
             user_card_component,
         ]

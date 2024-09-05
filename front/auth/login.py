@@ -13,7 +13,16 @@ def login_page(page: ft.Page, navigate_to_register):
                 "username": username,
                 "password": password
                 })
-            
+            if response.status_code == 200:
+                jwt_token = response.json().get('access_token')
+                if jwt_token:
+                    page.session.set("jwt_token", jwt_token)
+                    page.update()
+                else:
+                    print("Error: No se recibió el token JWT.")
+            else:
+                print("Error en el inicio de sesión.")
+                
             if response.status_code == 200:
                 data = response.json()
                 print("Data received:", data)
