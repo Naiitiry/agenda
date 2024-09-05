@@ -2,6 +2,8 @@ import flet as ft
 from auth.login import login_page
 from auth.register import register_page
 from home.home import home_page
+from task.create_task import create_task_user
+from components.add_task import add_task
 
 def main(page: ft.Page):
     page.title = "Task Management App"
@@ -22,6 +24,10 @@ def main(page: ft.Page):
         if page.route == '/home/home':
             home = home_page(page, lambda: page.go('/auth/login'))
             page.views.append(home)
+
+        if page.route == '/task/create_task':
+            create = create_task_user(page)
+            page.views.append(create)
 
         page.update()
         

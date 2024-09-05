@@ -5,8 +5,11 @@ API_BASE_URL = "http://127.0.0.1:5000/api"
 
 def add_task(page: ft.Page):
     def go_to_add_task(e):
-        page.go('/create_tasks')
-    
+        try:
+            # Simplemente redirige a la página de creación de tarea
+            page.go('/task/create_tasks')
+        except Exception as ex:
+            print(ex)
     boton_crear = ft.IconButton(
         icon=ft.icons.ADD_BUSINESS,
         icon_color=ft.colors.BLUE_400,
@@ -14,4 +17,4 @@ def add_task(page: ft.Page):
         tooltip="Crear tarea",
         on_click=go_to_add_task
     )
-    return boton_crear
+    return ft.Column(controls=[boton_crear])

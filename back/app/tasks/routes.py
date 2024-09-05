@@ -18,7 +18,7 @@ def get_tasks():
     ]
     return jsonify(tasks_json), 200
 
-@tasks_bp.route('/create_tasks',methods = ['POST'], endpoint='funcion2')
+@tasks_bp.route('/create_tasks',methods = ['GET','POST'], endpoint='funcion2')
 @jwt_required()
 def create_task():
     data = request.get_json()

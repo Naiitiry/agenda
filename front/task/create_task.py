@@ -4,7 +4,7 @@ from datetime import datetime
 
 API_BASE_URL = "http://127.0.0.1:5000/api"
 
-def main(page: ft.Page):
+def create_task_user(page: ft.Page):
 
     def create_task(e):
         title = title_input.value
@@ -37,13 +37,16 @@ def main(page: ft.Page):
     deadline_picker = ft.DatePicker(label='Deadline',on_change=lambda e: page.update())
     submit_task = ft.ElevatedButton(text='Create task',on_click=create_task)
 
-    return ft.Column(
+    content = ft.Column(
         controls=[
             ft.Text(value="Por favor ingrese los datos para la nueva tarea:"),
             title_input,
             description_input,
             deadline_picker,
             submit_task
-        ]
+        ],
+        spacing=10,
+        padding=20
     )
+    return content
 

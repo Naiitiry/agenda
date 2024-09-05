@@ -3,7 +3,7 @@ from components.user_card import user_card
 from components.theme import themes_change
 from components.add_task import add_task
 from task.task import task
-from task.create_task import main
+from task.create_task import create_task_user
 
 
 def home_page(page: ft.Page, on_logout: callable):
@@ -27,7 +27,7 @@ def home_page(page: ft.Page, on_logout: callable):
     # Traer las tareas
     tareas = task(page)
 
-    # Crear tareas
+    # Botón de Crear tareas
     crear_tareas = add_task(page)
     
     # Crear la tarjeta de usuario
