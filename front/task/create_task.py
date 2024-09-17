@@ -4,21 +4,23 @@ from datetime import datetime
 
 API_BASE_URL = "http://127.0.0.1:5000/api"
 
-def create_task_user(page: ft.Page):
+def create_new_task(page: ft.Page):
 
-    def create_task(e):
+    def create_task():
         title = title_input.value
         description = description_input.value
         deadline = deadline_picker.value
         # Convertir la fecha seleccionada en un formato adecuado para el backend
         deadline_datetime = datetime.strptime(deadline, "%Y-%m-%d").isoformat()
         try:
-            response = requests.post(f'{API_BASE_URL}/create_tasks',json={
+            response = requests.post(f'{API_BASE_URL}/task/create_tasks',json={
                 'title':title,
                 'description':description,
-                'deadline':deadline_datetime.isoformat(), # Enviar en formato ISO 8601
+                'deadline':deadline_datetime, # Enviar en formato ISO 8601
             }, 
-            headers={"Authorization": f"Bearer {page.session.get('jwt_token')}"})
+            headers={"Authorization": f"Bearer {page.session.get('jwt_token')}",
+                    "Content-Type": "application/json"
+                    })
 
             if response.status_code == 201:
                 page.snack_bar = ft.SnackBar(ft.Text("Task created successfully!"), bgcolor=ft.colors.GREEN)
@@ -34,19 +36,16 @@ def create_task_user(page: ft.Page):
 
     title_input = ft.TextField(label='Title')
     description_input = ft.TextField(label='Description',border_color=ft.colors.GREEN, multiline=True)
-    deadline_picker = ft.DatePicker(label='Deadline',on_change=lambda e: page.update())
+    deadline_picker = ft.DatePicker(on_change=lambda e: page.update())
     submit_task = ft.ElevatedButton(text='Create task',on_click=create_task)
 
-    content = ft.Column(
+    return ft.Column(
         controls=[
             ft.Text(value="Por favor ingrese los datos para la nueva tarea:"),
             title_input,
             description_input,
             deadline_picker,
             submit_task
-        ],
-        spacing=10,
-        padding=20
+        ]
     )
-    return content
 

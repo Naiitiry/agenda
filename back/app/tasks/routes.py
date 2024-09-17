@@ -25,7 +25,7 @@ def create_task():
     user_id = get_jwt_identity()
     new_task = Task(
         title = data['title'],
-        description = data.get('Description'),
+        description = data.get('description'),
         deadline = datetime.fromisoformat(data['deadline']),
         user_id = user_id
     )

@@ -3,11 +3,11 @@ import requests
 
 API_BASE_URL = "http://127.0.0.1:5000/api"
 
-def add_task(page: ft.Page):
+def add_task_user(page: ft.Page):
     def go_to_add_task(e):
         try:
             # Simplemente redirige a la página de creación de tarea
-            page.go('/task/create_tasks')
+            page.go('/task/create_task')
         except Exception as ex:
             print(ex)
     boton_crear = ft.IconButton(

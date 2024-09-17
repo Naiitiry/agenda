@@ -1,9 +1,9 @@
 import flet as ft
 from components.user_card import user_card
 from components.theme import themes_change
-from components.add_task import add_task
+from components.add_task import add_task_user
 from task.task import task
-from task.create_task import create_task_user
+
 
 
 def home_page(page: ft.Page, on_logout: callable):
@@ -28,11 +28,10 @@ def home_page(page: ft.Page, on_logout: callable):
     tareas = task(page)
 
     # Botón de Crear tareas
-    crear_tareas = add_task(page)
+    crear_tareas = add_task_user(page)
     
     # Crear la tarjeta de usuario
     user_card_component = user_card(page, username, handle_logout)
-
 
     # Añadir componentes a la página
     return ft.Column(
