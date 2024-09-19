@@ -1,6 +1,7 @@
 import flet as ft
 import requests
 from datetime import datetime
+from components.theme import themes_change
 
 API_BASE_URL = "http://127.0.0.1:5000/api"
 
@@ -51,6 +52,9 @@ def create_new_task(page: ft.Page):
         except Exception as ex:
             print(f'El error es: {ex}')
 
+    def go_back_home(e):
+        page.go('/home/home')
+
     title_input = ft.TextField(label='Title')
     description_input = ft.TextField(label='Description', border_color=ft.colors.GREEN, multiline=True)
     deadline_picker = ft.ElevatedButton(
@@ -64,17 +68,19 @@ def create_new_task(page: ft.Page):
         )
     )
     submit_task = ft.ElevatedButton(text='Create task', on_click=create_task)
-
-    
+    home = ft.ElevatedButton(text='Volver al Home', on_click=go_back_home)
+    cambio_de_tema = themes_change(page)
 
     return ft.Column(
         controls=[
+            cambio_de_tema,
             ft.Text(value="Por favor ingrese los datos para la nueva tarea:"),
             title_input,
             description_input,
             ft.Text(value="Deadline:"),  # Añadimos la etiqueta manualmente
             deadline_picker,
             selected_deadline_text,
-            submit_task
+            submit_task,
+            home
         ]
     )

@@ -11,7 +11,7 @@ def add_task_user(page: ft.Page):
         except Exception as ex:
             print(ex)
     boton_crear = ft.IconButton(
-        icon=ft.icons.ADD_BUSINESS,
+        icon=ft.icons.ADD_BOX_OUTLINED,
         icon_color=ft.colors.BLUE_400,
         icon_size=30,
         tooltip="Crear tarea",
