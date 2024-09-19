@@ -42,7 +42,7 @@ def themes_change(page: ft.Page):
         title=ft.Text("Agenda"),
         bgcolor=ft.colors.TRANSPARENT,
         actions=[
-            button_change_theme
+            button_change_theme,
         ]
     )
 
