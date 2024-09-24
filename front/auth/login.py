@@ -1,6 +1,5 @@
 import flet as ft
 import requests
-from components.theme import themes_change
 
 API_BASE_URL = "http://127.0.0.1:5000"
 
@@ -73,13 +72,9 @@ def login_page(page: ft.Page, navigate_to_register):
     login_button = ft.ElevatedButton(text="Login", on_click=login)
     register_button = ft.ElevatedButton(text="Go to Register", on_click=go_to_register)
 
-    # Cambio de tema
-    cambio_de_tema = themes_change(page)
-
     login_color = ft.Container(
         content=ft.Column(
                 controls=[
-                    #cambio_de_tema,
                     ft.Text("Login", size=30, color=ft.colors.WHITE),
                     username_input,
                     password_input,

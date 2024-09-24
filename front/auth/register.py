@@ -1,6 +1,5 @@
 import flet as ft
 import requests
-from components.theme import themes_change
 
 # URL base de tu API Flask
 API_BASE_URL = "http://127.0.0.1:5000"
@@ -48,14 +47,10 @@ def register_page(page: ft.Page, navigate_to_login):
     register_button = ft.ElevatedButton(text="Register", on_click=register,color=ft.colors.BLUE)
     login_button = ft.ElevatedButton(text="Go to Login", on_click=go_to_login)
 
-    # Cambio de tema
-    cambio_de_tema = themes_change(page)
-
     # Agrega los componentes a la página
     register_color = ft.Container(
         content = ft.Column(
                 controls=[
-                    #cambio_de_tema,
                     ft.Text("Register", size=30, color=ft.colors.WHITE),
                     username_input,
                     password_input,
