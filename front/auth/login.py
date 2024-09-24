@@ -43,8 +43,32 @@ def login_page(page: ft.Page, navigate_to_register):
     def go_to_register(e):
         navigate_to_register()
 
-    username_input = ft.TextField(label="Username", border="underline", border_color=ft.colors.AMBER)
-    password_input = ft.TextField(label="Password", password=True, can_reveal_password=True,border_color=ft.colors.BROWN)
+    username_input = ft.TextField(
+                                    label="Username",
+                                    label_style=ft.TextStyle(
+                                        color=ft.colors.WHITE
+                                    ),
+                                    border=ft.InputBorder.UNDERLINE,
+                                    color=ft.colors.WHITE,
+                                    cursor_color=ft.colors.WHITE,
+                                    bgcolor=ft.colors.TRANSPARENT,
+                                    filled=True,
+                                    focused_color=ft.colors.WHITE,
+                                    )
+    password_input = ft.TextField(
+                                label="Password", 
+                                label_style=ft.TextStyle(
+                                        color=ft.colors.WHITE
+                                    ),
+                                password=True, 
+                                can_reveal_password=True,
+                                border=ft.InputBorder.UNDERLINE,
+                                color=ft.colors.WHITE,
+                                cursor_color=ft.colors.WHITE,
+                                bgcolor=ft.colors.TRANSPARENT,
+                                filled=True,
+                                focused_color=ft.colors.WHITE
+                                )
     result_text = ft.Text("")
     login_button = ft.ElevatedButton(text="Login", on_click=login)
     register_button = ft.ElevatedButton(text="Go to Register", on_click=go_to_register)
@@ -52,14 +76,29 @@ def login_page(page: ft.Page, navigate_to_register):
     # Cambio de tema
     cambio_de_tema = themes_change(page)
 
-    return  ft.Column(
+    login_color = ft.Container(
+        content=ft.Column(
                 controls=[
-                    cambio_de_tema,
-                    ft.Text("Login", size=24),
+                    #cambio_de_tema,
+                    ft.Text("Login", size=30, color=ft.colors.WHITE),
                     username_input,
                     password_input,
                     login_button,
                     result_text,
                     register_button
-                ]
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            expand=True,
+            padding=20,
+            alignment=ft.alignment.center,
+            gradient=ft.LinearGradient(
+                begin=ft.alignment.top_left,
+                end=ft.alignment.bottom_right,
+                colors=["0xff6482AD","0xff7FA1C3"],
+                stops=[0.1,1.0]
+            ),
             )
+    
+    return login_color

@@ -40,10 +40,9 @@ def register_page(page: ft.Page, navigate_to_login):
     def go_to_login(e):
         navigate_to_login()
 
-    username_input = ft.TextField(label="Username", border="underline", border_color=ft.colors.AMBER)
+    username_input = ft.TextField(label="Username", border="underline")
     password_input = ft.TextField(label="Password", password=True,
-                                can_reveal_password=True,
-                                border_color=ft.colors.RED)
+                                can_reveal_password=True,)
     email_input = ft.TextField(label="Email",border_color=ft.colors.BROWN)
     result_text = ft.Text("")
     register_button = ft.ElevatedButton(text="Register", on_click=register,color=ft.colors.BLUE)
@@ -53,14 +52,30 @@ def register_page(page: ft.Page, navigate_to_login):
     cambio_de_tema = themes_change(page)
 
     # Agrega los componentes a la página
-    return ft.Column(
+    register_color = ft.Container(
+        content = ft.Column(
                 controls=[
-                    cambio_de_tema,
-                    ft.Text("Register", size=24),
+                    #cambio_de_tema,
+                    ft.Text("Register", size=30, color=ft.colors.WHITE),
                     username_input,
                     password_input,
                     email_input,
                     register_button,
                     result_text,
-                    login_button]
-        )
+                    login_button
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                ),
+                expand=True,
+                padding=20,
+                alignment=ft.alignment.center,
+                gradient=ft.LinearGradient(
+                        begin=ft.alignment.bottom_left,
+                        end=ft.alignment.top_right,
+                        colors=["0xffFC819E","0xffF7418F"],
+                        stops=[1.0,1.0]
+                        ),
+                )
+
+    return register_color

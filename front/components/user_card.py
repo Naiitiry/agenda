@@ -54,4 +54,4 @@ def user_card(page: ft.Page, username: str, on_logout: callable) -> ft.Column:
         ),
     )
 
-    return card
+    return 

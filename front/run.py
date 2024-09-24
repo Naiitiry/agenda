@@ -7,20 +7,33 @@ from task.create_task import create_new_task
 
 
 def main(page: ft.Page):
-    page.title = "Task Management App"
-    page.window.width = 800
+    page.title = "Agenda"
+    page.window.width = 400
     page.window.height = 600
-    page.window.resizable = False
+    #page.window.resizable = False
+    page.adaptive = True
 
     def route_change(route):
         page.views.clear()
         if page.route == '/auth/login':
             login = login_page(page,lambda: page.go('/auth/register'))
-            page.views.append(login)
+            page.views.append(
+                ft.View(
+                    route="/auth/login",
+                    controls=[login],
+                    padding=0
+                )
+            )
 
         if page.route == '/auth/register':
             register2 = register_page(page,lambda: page.go('/auth/login'))
-            page.views.append(register2)
+            page.views.append(
+                ft.View(
+                    route='/auth/register',
+                    controls=[register2],
+                    padding=0
+                )
+            )
 
         if page.route == '/home/home':
             home = home_page(page, lambda: page.go('/auth/login'), )
@@ -28,7 +41,13 @@ def main(page: ft.Page):
 
         if page.route == '/task/create_task':
             create_task_user = create_new_task(page)
-            page.views.append(create_task_user)
+            page.views.append(
+                ft.View(
+                    route='/task/create_taks',
+                    controls=[create_new_task],
+                    padding=0
+                )
+            )
 
         page.update()
         
