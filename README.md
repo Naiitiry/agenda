@@ -23,7 +23,7 @@ Estado del código:
 [Personas-Desarrolladores del Proyecto](#personas-desarrolladores)
 
 
-<h2 align="center">Descripción del proyecto</h2>
+<h2 align="center" id="descripción-del-proyecto">Descripción del proyecto</h2>
 Como bien se informó al principio, la aplicación está desarrollada sobre los frameworks de Flask y Flet, siendo que Flask es utilizado para el Back-End y Flet para el Front-End.
 La app sirve para agregar tareas, darles una fecha de creación (la cual es automático) y un tiempo límite con la posibilidad de extender ese tiempo límite.
 Contará con un calendario donde se podrá ver las fechas con tareas de menor a mayor grado, aún estoy debatiendo como será gráficamente, si con simples colores o algún otro método.
