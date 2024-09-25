@@ -3,10 +3,7 @@ import flet as ft
 # Variable global para el tema
 current_theme_mode = ft.ThemeMode.LIGHT
 
-def themes_change(page: ft.Page):
-    # Cargar el tema claro
-    page.theme_mode = current_theme_mode
-
+def get_theme_button(page: ft.Page)->ft.IconButton:
     # Alternar entre claro y oscuro
     def change_theme(e):
         global current_theme_mode
@@ -37,13 +34,5 @@ def themes_change(page: ft.Page):
             color=ft.colors.BLACK
         )
     )
-    # Barra de navegaci+on para el botón
-    nav_bar = ft.AppBar(
-        title=ft.Text("Agenda"),
-        bgcolor=ft.colors.TRANSPARENT,
-        actions=[
-            button_change_theme,
-        ]
-    )
 
-    return nav_bar
+    return button_change_theme

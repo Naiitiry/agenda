@@ -1,11 +1,11 @@
 import flet as ft
 import requests
 from datetime import datetime
-from components.theme import themes_change
+from components.description import create_appbar
 
 API_BASE_URL = "http://127.0.0.1:5000/api"
 
-def create_new_task(page: ft.Page):
+def create_new_task(page: ft.Page, on_logout: callable):
 
     selected_deadline_text = ft.Text(value="Fecha seleccionada: Ninguna")  # Texto para mostrar la fecha seleccionada
     selected_date = None
@@ -54,6 +54,18 @@ def create_new_task(page: ft.Page):
 
     def go_back_home(e):
         page.go('/home/home')
+    
+    username = page.session.get("username")  # Obtener el nombre de usuario de la sesión
+
+    def handle_logout():
+        # Eliminar sesión y redirigir al login
+        print("Deslogeo exitoso!")
+        on_logout
+        page.session.set("logged_in", False)
+        page.session.remove('username')
+        page.session.clear()
+        page.go("/auth/login")  # Redirige al login después del logout
+
 
     title_input = ft.TextField(label='Title')
     description_input = ft.TextField(label='Description', border_color=ft.colors.GREEN, multiline=True)
@@ -69,11 +81,11 @@ def create_new_task(page: ft.Page):
     )
     submit_task = ft.ElevatedButton(text='Create task', on_click=create_task)
     home = ft.ElevatedButton(text='Volver al Home', on_click=go_back_home)
-    cambio_de_tema = themes_change(page)
+    app_bar = create_appbar(page,username,handle_logout)
 
     return ft.Column(
         controls=[
-            cambio_de_tema,
+            app_bar,
             ft.Text(value="Por favor ingrese los datos para la nueva tarea:"),
             title_input,
             description_input,

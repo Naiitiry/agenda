@@ -1,9 +1,18 @@
 import flet as ft
 import requests
 
-API_BASE_URL = "http://127.0.0.1:5000"
+API_BASE_URL = "http://127.0.0.1:5000/api"
 
-def user_card(page: ft.Page, username: str, on_logout: callable) -> ft.Column:
+# Función para obtener el nombre de usuario
+def get_user_info(username: str, email: str):
+    return ft.Row(
+        controls=[
+            ft.Text(f"Username: {username}"),
+            ft.Text(f"Email: {email}"),
+        ]
+    )
+
+def get_logout_button(page: ft.Page, on_logout: callable) -> ft.Column:
 
     def logout(e):
         try:
@@ -36,22 +45,14 @@ def user_card(page: ft.Page, username: str, on_logout: callable) -> ft.Column:
             page.snack_bar.open = True
             page.update()
 
-    # Crear componentes de la tarjeta
-    user_info = ft.Text(f"{username}", size=20)
-    logout_button = ft.ElevatedButton(text="Logout", on_click=logout)
+    return ft.ElevatedButton(text='Logout',on_click=logout())
 
-    # Crear la tarjeta
-    card = ft.Card(
-        content=ft.Container(
-            content=ft.Column(
-                controls=[user_info, logout_button],
-                spacing=10
-            ),
-            padding=10,
-            border_radius=10,
-            bgcolor="#f0f0f0",
-            border=ft.border_radius.all(10)
-        ),
+# Función para obtener todos los datos del usuario (ej. para ver todos los datos completos)
+def get_full_user_data(username: str, email: str) -> ft.Column:
+    return ft.Column(
+        controls=[
+            ft.Text(f"Username: {username}", size=20),
+            ft.Text(f"Email: {email}", size=20),
+            # Puedes añadir más datos aquí si lo deseas
+        ]
     )
-
-    return 

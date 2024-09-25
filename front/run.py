@@ -2,7 +2,6 @@ import flet as ft
 from auth.login import login_page
 from auth.register import register_page
 from home.home import home_page
-from components.add_task import add_task_user
 from task.create_task import create_new_task
 
 
@@ -37,14 +36,20 @@ def main(page: ft.Page):
 
         if page.route == '/home/home':
             home = home_page(page, lambda: page.go('/auth/login'), )
-            page.views.append(home)
+            page.views.append(
+                ft.View(
+                    route='/home/home',
+                    controls=[home],
+                    padding=0
+                )
+            )
 
         if page.route == '/task/create_task':
-            create_task_user = create_new_task(page)
+            create_task_user = create_new_task(page, lambda: page.go('/auth/login'))
             page.views.append(
                 ft.View(
                     route='/task/create_taks',
-                    controls=[create_new_task],
+                    controls=[create_task_user],
                     padding=0
                 )
             )
